@@ -1,13 +1,40 @@
 'use client';
 
-import { useState } from 'react';
-import { Hero } from '@/components/home/Hero';
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Badge } from "@/components/ui/badge";
 
-export default function Home(): React.JSX.Element {
+interface UserInfo {
+  name: string;
+  displayName: string;
+  id: number;
+  created: string;
+  description: string;
+  avatar: string;
+  isBanned: boolean;
+}
+
+export default function Home() {
   const [username, setUsername] = useState('');
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Vérifier si l'utilisateur vient de se connecter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('logged') === 'true') {
+      setIsLoggedIn(true);
+      // Nettoyer l'URL
+      window.history.replaceState({}, document.title, '/');
+    }
+  }, []);
 
   const searchUser = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,59 +58,125 @@ export default function Home(): React.JSX.Element {
     }
   };
 
+  const handleLogin = () => {
+    window.location.href = '/api/auth/roblox';
+  };
+
   return (
-    <main className="min-h-screen bg-[#17181B]">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Recherche d&apos;utilisateur Roblox</h1>
-        
-        <form onSubmit={searchUser} className="mb-8">
-          <div className="flex gap-4">
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Entrez un nom d'utilisateur"
-              className="flex-1 p-2 border rounded"
-              required
-            />
-            <button
-              type="submit"
-              disabled={loading}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
-            >
-              {loading ? 'Recherche...' : 'Rechercher'}
-            </button>
-          </div>
-        </form>
+    <main className="min-h-screen bg-background p-8">
+      <div className="max-w-2xl mx-auto space-y-8">
+        <Card>
+          <CardHeader>
+            <CardTitle>Recherche d&apos;utilisateur Roblox</CardTitle>
+            <CardDescription>
+              Entrez un nom d&apos;utilisateur Roblox pour voir ses informations
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {!isLoggedIn ? (
+              <Button 
+                onClick={handleLogin}
+                className="w-full bg-[#00A2FF] hover:bg-[#008AE0]"
+              >
+                Se connecter avec Roblox
+              </Button>
+            ) : (
+              <Alert className="bg-green-100 text-green-800 mb-4">
+                <AlertDescription>
+                  Vous êtes connecté avec succès !
+                </AlertDescription>
+              </Alert>
+            )}
+
+            <form onSubmit={searchUser} className="flex gap-4">
+              <Input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Entrez un nom d'utilisateur"
+                className="flex-1"
+                required
+              />
+              <Button type="submit" disabled={loading}>
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                    Recherche...
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    <Search className="h-4 w-4" />
+                    Rechercher
+                  </span>
+                )}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
 
         {error && (
-          <div className="p-4 bg-red-100 text-red-700 rounded mb-4">
-            {error}
-          </div>
+          <Alert variant="destructive">
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+
+        {loading && (
+          <Card>
+            <CardContent className="pt-6">
+              <div className="flex gap-6">
+                <Skeleton className="h-32 w-32 rounded-full" />
+                <div className="flex-1 space-y-4">
+                  <Skeleton className="h-8 w-[250px]" />
+                  <Skeleton className="h-4 w-[200px]" />
+                  <Skeleton className="h-4 w-[300px]" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         )}
 
         {userInfo && (
-          <div className="bg-white p-6 rounded-lg shadow">
-            <div className="flex items-start gap-6">
-              {userInfo.avatar && (
-                <img
-                  src={userInfo.avatar}
-                  alt={`Avatar de ${userInfo.name}`}
-                  className="w-32 h-32 rounded-full"
-                />
-              )}
-              <div>
-                <h2 className="text-2xl font-bold mb-2">{userInfo.name}</h2>
-                <p className="text-gray-600 mb-2">ID: {userInfo.id}</p>
-                <p className="text-gray-600 mb-2">
-                  Créé le: {new Date(userInfo.created).toLocaleDateString()}
-                </p>
-                <p className="text-gray-600">
-                  Description: {userInfo.description || 'Aucune description'}
-                </p>
+          <Card>
+            <CardContent className="pt-6">
+              <div className="flex flex-col md:flex-row gap-6">
+                {userInfo.avatar && (
+                  <div className="relative">
+                    <img
+                      src={userInfo.avatar}
+                      alt={`Avatar de ${userInfo.name}`}
+                      className="w-32 h-32 rounded-full object-cover border-4 border-primary/10"
+                    />
+                    {userInfo.isBanned && (
+                      <Badge variant="destructive" className="absolute -top-2 -right-2">
+                        Banni
+                      </Badge>
+                    )}
+                  </div>
+                )}
+                <div className="flex-1 space-y-4">
+                  <div>
+                    <h2 className="text-2xl font-bold">{userInfo.displayName}</h2>
+                    <p className="text-muted-foreground">@{userInfo.name}</p>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-sm text-muted-foreground">
+                      ID: {userInfo.id}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Créé le: {new Date(userInfo.created).toLocaleDateString()}
+                    </p>
+                  </div>
+                  {userInfo.description && (
+                    <div className="bg-muted p-4 rounded-lg">
+                      <p className="text-sm whitespace-pre-wrap">
+                        {userInfo.description}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         )}
       </div>
     </main>
