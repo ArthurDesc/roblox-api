@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 const ROBLOX_TOKEN_URL = 'https://apis.roblox.com/oauth/v1/token';
-const REDIRECT_URI = 'http://localhost:3000/api/auth/roblox/callback';
+const REDIRECT_URI = 'https://85ef-88-162-202-56.ngrok-free.app/api/auth/roblox/callback';
 
 async function getAccessToken(code: string) {
   const clientId = process.env.ROBLOX_OAUTHID;
