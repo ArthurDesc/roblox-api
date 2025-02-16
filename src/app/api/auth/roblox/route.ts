@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 const ROBLOX_OAUTH_URL = 'https://apis.roblox.com/oauth/v1/authorize';
-const REDIRECT_URI = 'https://85ef-88-162-202-56.ngrok-free.app/api/auth/roblox/callback';
+const REDIRECT_URI = 'https://56b0-88-162-202-56.ngrok-free.app/api/auth/roblox/callback';
 
 export async function GET() {
   try {
