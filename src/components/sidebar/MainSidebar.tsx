@@ -30,7 +30,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 export function MainSidebar() {
   return (
     <Sidebar variant="sidebar" collapsible="icon">
-
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="px-6">Navigation</SidebarGroupLabel>
@@ -131,12 +130,12 @@ export function MainSidebar() {
       <SidebarFooter className="border-t">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="flex h-[60px] w-full items-center gap-3 px-6 hover:bg-accent">
+            <button className="flex h-[60px] w-full items-center justify-center gap-3 px-6 hover:bg-accent group-data-[collapsible=icon]:px-2">
               <Avatar className="h-8 w-8">
                 <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                 <AvatarFallback>SC</AvatarFallback>
               </Avatar>
-              <div className="flex flex-col items-start text-left">
+              <div className="flex flex-col items-start text-left group-data-[collapsible=icon]:hidden">
                 <span className="text-sm font-medium">shadcn</span>
                 <span className="text-xs text-muted-foreground">m@example.com</span>
               </div>
