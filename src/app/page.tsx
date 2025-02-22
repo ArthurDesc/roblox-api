@@ -88,10 +88,10 @@ export default function Home() {
   return (
     <>
       <Toaster position="top-center" />
-      <main className="min-h-screen bg-background text-foreground">
+      <main className="min-h-screen bg-background text-foreground relative">
         {/* Hero Section */}
         <div className="relative py-20 px-4 text-center">
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 z-9">
             <div className="absolute w-96 h-96 bg-[#00A2FF] rounded-full blur-[150px] -top-20 -left-20 opacity-20 animate-pulse" />
             <div className="absolute w-96 h-96 bg-[#FF3F3F] rounded-full blur-[150px] -bottom-20 -right-20 opacity-20 animate-pulse" />
           </div>

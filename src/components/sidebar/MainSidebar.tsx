@@ -87,7 +87,7 @@ export function MainSidebar() {
 
   return (
     <Sidebar variant="floating" collapsible="icon" className="font-[var(--font-anta)] border-r-0">
-      <SidebarContent>
+      <SidebarContent className="relative z-10 bg-gradient-to-br from-primary/5 via-transparent to-primary/10">
         <SidebarGroup>
           <SidebarGroupLabel className="px-6 font-[var(--font-anta)] text-sm font-medium text-muted-foreground">
             Navigation
@@ -228,7 +228,7 @@ export function MainSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t p-2 backdrop-blur">
+      <SidebarFooter className="border-t p-2 backdrop-blur bg-gradient-to-br from-primary/5 via-transparent to-primary/10">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button 
