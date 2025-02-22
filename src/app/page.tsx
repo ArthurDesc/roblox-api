@@ -97,19 +97,17 @@ export default function Home() {
           </div>
           <div className="relative z-10 max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Gagnez des <span className="text-[#00A2FF]">Robux</span> facilement !
+              Transformez vos <span className="text-[#FF3F3F]">Rêves</span> en Robux !
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
-              Participez à des mini-jeux, complétez des tâches et obtenez des Robux en récompense. 
-              C'est simple, rapide et amusant !
+              Rejoignez notre communauté de joueurs passionnés et découvrez un monde de récompenses. 
+              Chaque défi relevé vous rapproche de vos objectifs Roblox !
             </p>
             <div className="flex justify-center w-full">
-              <ThreeDButton
-                onClick={handleLogin}
-              >
+              <ThreeDButton onClick={handleLogin}>
                 <div className="flex items-center">
                   <LogIn className="mr-2 h-6 w-6" />
-                  <span>{isLoggedIn ? 'Accéder à mon compte' : 'Se connecter avec Roblox'}</span>
+                  <span>{isLoggedIn ? 'Accéder à mon compte' : 'Commencer l\'aventure !'}</span>
                 </div>
               </ThreeDButton>
             </div>
