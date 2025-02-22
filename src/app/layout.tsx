@@ -5,7 +5,8 @@ import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/s
 import { Separator } from "@/components/ui/separator";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { Footer } from "@/components/layout/Footer"
+import { Footer } from "@/components/layout/Footer";
+import FreeRobuxButton from "@/components/ui/FreeRobuxButton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,6 +42,9 @@ export default function RootLayout({
               <SidebarInset>
                 <header className="sticky top-0 flex h-14 shrink-0 items-center gap-2 px-4">
                   <SidebarTrigger />
+                  <div className="fixed top-4 right-4 z-50">
+                    <FreeRobuxButton />
+                  </div>
                 </header>
                 <main className="flex-1">
                   <div className="flex-1 space-y-4 p-4">
