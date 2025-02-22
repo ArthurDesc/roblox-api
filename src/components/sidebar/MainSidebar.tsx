@@ -86,49 +86,71 @@ export function MainSidebar() {
   };
 
   return (
-    <Sidebar variant="sidebar" collapsible="icon" className="font-[var(--font-anta)]">
+    <Sidebar variant="floating" collapsible="icon" className="font-[var(--font-anta)] border-r-0">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="px-6 font-[var(--font-anta)]">Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel className="px-6 font-[var(--font-anta)] text-sm font-medium text-muted-foreground">
+            Navigation
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Home">
+                <SidebarMenuButton 
+                  asChild 
+                  tooltip="Home"
+                  className="hover:bg-accent/50 transition-colors"
+                >
                   <a href="/" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
-                    <Home className="h-4 w-4" />
-                    <span>Home</span>
+                    <Home className="h-4 w-4 text-primary" />
+                    <span className="text-foreground">Home</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="History">
+                <SidebarMenuButton 
+                  asChild 
+                  tooltip="History"
+                  className="hover:bg-accent/50 transition-colors"
+                >
                   <a href="/history" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
-                    <History className="h-4 w-4" />
-                    <span>History</span>
+                    <History className="h-4 w-4 text-primary" />
+                    <span className="text-foreground">History</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Favorites">
+                <SidebarMenuButton 
+                  asChild 
+                  tooltip="Favorites"
+                  className="hover:bg-accent/50 transition-colors"
+                >
                   <a href="/starred" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
-                    <Star className="h-4 w-4" />
-                    <span>Favorites</span>
+                    <Star className="h-4 w-4 text-primary" />
+                    <span className="text-foreground">Favorites</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Search">
+                <SidebarMenuButton 
+                  asChild 
+                  tooltip="Search"
+                  className="hover:bg-accent/50 transition-colors"
+                >
                   <a href="/search" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
-                    <Search className="h-4 w-4" />
-                    <span>Search</span>
+                    <Search className="h-4 w-4 text-primary" />
+                    <span className="text-foreground">Search</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Settings">
+                <SidebarMenuButton 
+                  asChild 
+                  tooltip="Settings"
+                  className="hover:bg-accent/50 transition-colors"
+                >
                   <a href="/settings" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
-                    <Settings className="h-4 w-4" />
-                    <span>Settings</span>
+                    <Settings className="h-4 w-4 text-primary" />
+                    <span className="text-foreground">Settings</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -137,44 +159,66 @@ export function MainSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className="px-6 font-[var(--font-anta)]">Documentation</SidebarGroupLabel>
+          <SidebarGroupLabel className="px-6 font-[var(--font-anta)] text-sm font-medium text-muted-foreground">
+            Documentation
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="API Reference">
+                <SidebarMenuButton 
+                  asChild 
+                  tooltip="API Reference"
+                  className="hover:bg-accent/50 transition-colors"
+                >
                   <a href="/docs/api" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
-                    <Book className="h-4 w-4" />
-                    <span>API Reference</span>
+                    <Book className="h-4 w-4 text-primary" />
+                    <span className="text-foreground">API Reference</span>
                   </a>
                 </SidebarMenuButton>
-                <SidebarMenuSub>
+                <SidebarMenuSub className="ml-4 border-l-2 border-accent/20">
                   <SidebarMenuSubItem>
-                    <SidebarMenuSubButton href="/docs/api/getting-started">
+                    <SidebarMenuSubButton 
+                      href="/docs/api/getting-started"
+                      className="hover:bg-accent/50 transition-colors"
+                    >
                       Getting Started
                     </SidebarMenuSubButton>
                   </SidebarMenuSubItem>
                   <SidebarMenuSubItem>
-                    <SidebarMenuSubButton href="/docs/api/authentication">
+                    <SidebarMenuSubButton 
+                      href="/docs/api/authentication"
+                      className="hover:bg-accent/50 transition-colors"
+                    >
                       Authentication
                     </SidebarMenuSubButton>
                   </SidebarMenuSubItem>
                 </SidebarMenuSub>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Guides">
+                <SidebarMenuButton 
+                  asChild 
+                  tooltip="Guides"
+                  className="hover:bg-accent/50 transition-colors"
+                >
                   <a href="/docs/guides" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
-                    <FileText className="h-4 w-4" />
-                    <span>Guides</span>
+                    <FileText className="h-4 w-4 text-primary" />
+                    <span className="text-foreground">Guides</span>
                   </a>
                 </SidebarMenuButton>
-                <SidebarMenuSub>
+                <SidebarMenuSub className="ml-4 border-l-2 border-accent/20">
                   <SidebarMenuSubItem>
-                    <SidebarMenuSubButton href="/docs/guides/basics">
+                    <SidebarMenuSubButton 
+                      href="/docs/guides/basics"
+                      className="hover:bg-accent/50 transition-colors"
+                    >
                       Basics
                     </SidebarMenuSubButton>
                   </SidebarMenuSubItem>
                   <SidebarMenuSubItem>
-                    <SidebarMenuSubButton href="/docs/guides/advanced">
+                    <SidebarMenuSubButton 
+                      href="/docs/guides/advanced"
+                      className="hover:bg-accent/50 transition-colors"
+                    >
                       Advanced
                     </SidebarMenuSubButton>
                   </SidebarMenuSubItem>
@@ -184,16 +228,16 @@ export function MainSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t p-2">
+      <SidebarFooter className="border-t p-2 backdrop-blur">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button 
-              className="flex h-[60px] w-full items-center gap-3 px-4 hover:bg-accent/50 rounded-md transition-colors group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-2 focus:outline-none"
+              className="flex h-[60px] w-full items-center gap-3 px-4 hover:bg-accent/50 rounded-lg transition-colors group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-2 focus:outline-none"
               onClick={!user ? handleLogin : undefined}
             >
-              <Avatar className="h-8 w-8 flex-shrink-0">
+              <Avatar className="h-8 w-8 flex-shrink-0 border-2 border-primary/10">
                 <AvatarImage src={user?.avatarUrl} alt={user?.displayName} />
-                <AvatarFallback>
+                <AvatarFallback className="bg-primary/10">
                   {user ? user.displayName[0] : 'L'}
                 </AvatarFallback>
               </Avatar>
