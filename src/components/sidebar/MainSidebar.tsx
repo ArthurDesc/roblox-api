@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Home, History, Star, Settings, Search, Book, FileText } from "lucide-react"
+import { Home, History, Star, Settings, Search, Book, FileText, CreditCard, Bell, LogOut } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -17,21 +17,32 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export function MainSidebar() {
   return (
-    <Sidebar variant="sidebar" collapsible="icon">
-      <SidebarHeader className="border-b px-2 py-4">
-        <h2 className="text-lg font-semibold tracking-tight">Roblox API</h2>
+    <Sidebar>
+      <SidebarHeader className="border-b">
+        <div className="flex h-[60px] items-center px-6">
+          <span className="font-semibold">Roblox API</span>
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel className="px-6">Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Accueil">
-                  <a href="/">
+                  <a href="/" className="flex items-center gap-3 px-6">
                     <Home className="h-4 w-4" />
                     <span>Accueil</span>
                   </a>
@@ -39,7 +50,7 @@ export function MainSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Historique">
-                  <a href="/history">
+                  <a href="/history" className="flex items-center gap-3 px-6">
                     <History className="h-4 w-4" />
                     <span>Historique</span>
                   </a>
@@ -47,7 +58,7 @@ export function MainSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Favoris">
-                  <a href="/starred">
+                  <a href="/starred" className="flex items-center gap-3 px-6">
                     <Star className="h-4 w-4" />
                     <span>Favoris</span>
                   </a>
@@ -55,7 +66,7 @@ export function MainSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Recherche">
-                  <a href="/search">
+                  <a href="/search" className="flex items-center gap-3 px-6">
                     <Search className="h-4 w-4" />
                     <span>Recherche</span>
                   </a>
@@ -63,7 +74,7 @@ export function MainSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Paramètres">
-                  <a href="/settings">
+                  <a href="/settings" className="flex items-center gap-3 px-6">
                     <Settings className="h-4 w-4" />
                     <span>Paramètres</span>
                   </a>
@@ -74,12 +85,12 @@ export function MainSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Documentation</SidebarGroupLabel>
+          <SidebarGroupLabel className="px-6">Documentation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="API Reference">
-                  <a href="/docs/api">
+                  <a href="/docs/api" className="flex items-center gap-3 px-6">
                     <Book className="h-4 w-4" />
                     <span>API Reference</span>
                   </a>
@@ -99,7 +110,7 @@ export function MainSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Guides">
-                  <a href="/docs/guides">
+                  <a href="/docs/guides" className="flex items-center gap-3 px-6">
                     <FileText className="h-4 w-4" />
                     <span>Guides</span>
                   </a>
@@ -121,10 +132,42 @@ export function MainSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="border-t px-2 py-4">
-        <p className="text-xs text-muted-foreground">
-          Version 1.0.0
-        </p>
+      <SidebarFooter className="border-t">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="flex h-[60px] w-full items-center gap-3 px-6 hover:bg-accent">
+              <Avatar className="h-8 w-8">
+                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                <AvatarFallback>SC</AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col items-start text-left">
+                <span className="text-sm font-medium">shadcn</span>
+                <span className="text-xs text-muted-foreground">m@example.com</span>
+              </div>
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56" align="start" side="right">
+            <DropdownMenuLabel>Mon Compte</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <CreditCard className="mr-2 h-4 w-4" />
+              <span>Facturation</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Settings className="mr-2 h-4 w-4" />
+              <span>Paramètres</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Bell className="mr-2 h-4 w-4" />
+              <span>Notifications</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-red-600">
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Déconnexion</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </SidebarFooter>
     </Sidebar>
   )
