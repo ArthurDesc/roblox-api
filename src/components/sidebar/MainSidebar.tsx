@@ -26,8 +26,48 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+interface RobloxUser {
+  name: string;
+  displayName: string;
+  avatarUrl?: string;
+}
 
 export function MainSidebar() {
+  const router = useRouter();
+  const [user, setUser] = useState<RobloxUser | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch('/api/auth/me');
+        if (response.ok) {
+          const data = await response.json();
+          if (!data.error) {
+            setUser({
+              name: data.name,
+              displayName: data.displayName,
+              avatarUrl: `https://www.roblox.com/headshot-thumbnail/image?userId=${data.id}&width=420&height=420&format=png`
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const handleLogin = () => {
+    router.push('/api/auth/roblox');
+  };
+
   return (
     <Sidebar variant="sidebar" collapsible="icon">
       <SidebarContent>
@@ -130,38 +170,51 @@ export function MainSidebar() {
       <SidebarFooter className="border-t">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="flex h-[60px] w-full items-center justify-center gap-3 px-6 hover:bg-accent group-data-[collapsible=icon]:px-2">
+            <button 
+              className="flex h-[60px] w-full items-center justify-center gap-3 px-6 hover:bg-accent group-data-[collapsible=icon]:px-2"
+              onClick={!user ? handleLogin : undefined}
+            >
               <Avatar className="h-8 w-8">
-                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                <AvatarFallback>SC</AvatarFallback>
+                <AvatarImage src={user?.avatarUrl} alt={user?.displayName} />
+                <AvatarFallback>
+                  {user ? user.displayName[0] : 'C'}
+                </AvatarFallback>
               </Avatar>
               <div className="flex flex-col items-start text-left group-data-[collapsible=icon]:hidden">
-                <span className="text-sm font-medium">shadcn</span>
-                <span className="text-xs text-muted-foreground">m@example.com</span>
+                <span className="text-sm font-medium">
+                  {user ? user.displayName : 'Connexion'}
+                </span>
+                {user && (
+                  <span className="text-xs text-muted-foreground">
+                    @{user.name}
+                  </span>
+                )}
               </div>
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="start" side="right">
-            <DropdownMenuLabel>Mon Compte</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <CreditCard className="mr-2 h-4 w-4" />
-              <span>Facturation</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Paramètres</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Bell className="mr-2 h-4 w-4" />
-              <span>Notifications</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="text-red-600">
-              <LogOut className="mr-2 h-4 w-4" />
-              <span>Déconnexion</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
+          {user && (
+            <DropdownMenuContent className="w-56" align="start" side="right">
+              <DropdownMenuLabel>Mon Compte</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <CreditCard className="mr-2 h-4 w-4" />
+                <span>Facturation</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Settings className="mr-2 h-4 w-4" />
+                <span>Paramètres</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Bell className="mr-2 h-4 w-4" />
+                <span>Notifications</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-red-600">
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Déconnexion</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          )}
         </DropdownMenu>
       </SidebarFooter>
     </Sidebar>
