@@ -10,13 +10,13 @@ export function ThreeDButton({ children, className, ...props }: ThreeDButtonProp
   return (
     <div className="flex justify-center items-center relative group w-fit">
       {/* Effet de glow en arrière-plan */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#FF3F3F] via-[#FF6B2B] to-[#FFA726] rounded-[20px] opacity-70 blur-md group-hover:opacity-100 transition-all duration-500 group-hover:duration-200 animate-tilt"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--button-from))] via-[hsl(var(--button-to))] to-[hsl(var(--button-glow))] rounded-[20px] opacity-[var(--button-opacity)] blur-md group-hover:opacity-100 transition-all duration-500 group-hover:duration-200 animate-tilt"></div>
       
-      <div className="bg-gradient-to-b from-[#FF3F3F]/40 to-transparent p-[4px] rounded-[16px] relative">
+      <div className="bg-gradient-to-b from-[hsl(var(--button-from)_/_0.4)] to-transparent p-[4px] rounded-[16px] relative">
         <button
           className={cn(
             "group p-[4px] rounded-[12px]",
-            "bg-gradient-to-b from-[#FF6B2B] to-[#FF3F3F]",
+            "bg-gradient-to-b from-[hsl(var(--button-to))] to-[hsl(var(--button-from))]",
             "shadow-[0_2px_4px_rgba(0,0,0,0.7)]",
             "hover:shadow-[0_8px_16px_rgba(0,0,0,0.5)]",
             "hover:translate-y-[-2px]",
@@ -28,7 +28,7 @@ export function ThreeDButton({ children, className, ...props }: ThreeDButtonProp
           )}
           {...props}
         >
-          <div className="relative bg-gradient-to-b from-[#FF6B2B] to-[#FF3F3F] rounded-[8px] px-4 py-3 overflow-hidden">
+          <div className="relative bg-gradient-to-b from-[hsl(var(--button-to))] to-[hsl(var(--button-from))] rounded-[8px] px-4 py-3 overflow-hidden">
             {/* Effet de brillance au hover */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-gradient-to-r from-transparent via-white to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></div>
             

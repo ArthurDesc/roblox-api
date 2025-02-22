@@ -35,7 +35,7 @@ export default function Home() {
   const [loggedInUser, setLoggedInUser] = useState<RobloxUser | null>(null);
 
   useEffect(() => {
-    // Vérifier l'état de connexion au chargement
+    // Check login status on load
     fetch('/api/auth/me')
       .then(res => res.json())
       .then(data => {
@@ -45,18 +45,18 @@ export default function Home() {
             name: data.name,
             displayName: data.displayName
           });
-          // Afficher la notification si l'utilisateur vient de se connecter
+          // Show notification if user just logged in
           const urlParams = new URLSearchParams(window.location.search);
           if (urlParams.get('logged') === 'true') {
-            toast.success('Connexion réussie !', {
-              description: `Bienvenue ${data.displayName || data.name}`,
+            toast.success('Login successful!', {
+              description: `Welcome ${data.displayName || data.name}`,
             });
-            // Nettoyer l'URL
+            // Clean up URL
             window.history.replaceState({}, document.title, '/');
           }
         }
       })
-      .catch(err => console.error('Erreur lors de la vérification de la connexion:', err));
+      .catch(err => console.error('Error checking login status:', err));
   }, []);
 
   const searchUser = async (e: React.FormEvent) => {
@@ -72,10 +72,10 @@ export default function Home() {
       if (response.ok) {
         setUserInfo(data);
       } else {
-        setError(data.error || 'Une erreur est survenue');
+        setError(data.error || 'An error occurred');
       }
     } catch (err) {
-      setError('Erreur lors de la recherche de l\'utilisateur');
+      setError('Error searching for user');
     } finally {
       setLoading(false);
     }
@@ -97,17 +97,17 @@ export default function Home() {
           </div>
           <div className="relative z-10 max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Transformez vos <span className="text-[#FF3F3F]">Rêves</span> en Robux !
+              Turn your <span className="text-[#FF3F3F]">Dreams</span> into Robux!
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
-              Rejoignez notre communauté de joueurs passionnés et découvrez un monde de récompenses. 
-              Chaque défi relevé vous rapproche de vos objectifs Roblox !
+              Join our community of passionate players and discover a world of rewards. 
+              Every challenge you complete brings you closer to your Roblox goals!
             </p>
             <div className="flex justify-center w-full">
               <ThreeDButton onClick={handleLogin}>
                 <div className="flex items-center">
                   <LogIn className="mr-2 h-6 w-6" />
-                  <span>{isLoggedIn ? 'Accéder à mon compte' : 'Commencer l\'aventure !'}</span>
+                  <span>{isLoggedIn ? 'Access my account' : 'Start the adventure!'}</span>
                 </div>
               </ThreeDButton>
             </div>
@@ -118,39 +118,39 @@ export default function Home() {
         <div className="py-16 px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              Comment ça marche ?
+              How it works
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <Card>
                 <CardHeader>
                   <HomeIcon className="h-10 w-10 mb-4 text-[#00A2FF]" />
-                  <CardTitle>Créez un compte</CardTitle>
+                  <CardTitle>Create an account</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    Inscrivez-vous en quelques secondes avec votre compte Roblox.
+                    Sign up in seconds with your Roblox account.
                   </CardDescription>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
                   <Star className="h-10 w-10 mb-4 text-[#00A2FF]" />
-                  <CardTitle>Gagnez des points</CardTitle>
+                  <CardTitle>Earn points</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    Complétez des mini-jeux et des tâches pour accumuler des points.
+                    Complete mini-games and tasks to accumulate points.
                   </CardDescription>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
                   <Gift className="h-10 w-10 mb-4 text-[#00A2FF]" />
-                  <CardTitle>Échangez vos points</CardTitle>
+                  <CardTitle>Exchange your points</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-muted-foreground">
-                    Convertissez vos points en Robux et recevez-les instantanément.
+                    Convert your points into Robux and receive them instantly.
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -162,28 +162,28 @@ export default function Home() {
         <div className="py-16 px-4 bg-background">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              Pourquoi choisir notre site ?
+              Why choose our site?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <Clock className="h-10 w-10 mb-4 mx-auto text-[#00A2FF]" />
-                <h3 className="text-xl font-semibold mb-2">Rapide et facile</h3>
+                <h3 className="text-xl font-semibold mb-2">Fast and easy</h3>
                 <p className="text-muted-foreground">
-                  Gagnez des Robux en quelques minutes grâce à des tâches simples.
+                  Earn Robux in minutes through simple tasks.
                 </p>
               </div>
               <div className="text-center">
                 <CheckCircle className="h-10 w-10 mb-4 mx-auto text-[#00A2FF]" />
-                <h3 className="text-xl font-semibold mb-2">Sécurisé</h3>
+                <h3 className="text-xl font-semibold mb-2">Secure</h3>
                 <p className="text-muted-foreground">
-                  Votre compte Roblox est en sécurité avec notre système de connexion OAuth.
+                  Your Roblox account is safe with our OAuth login system.
                 </p>
               </div>
               <div className="text-center">
                 <Gift className="h-10 w-10 mb-4 mx-auto text-[#00A2FF]" />
-                <h3 className="text-xl font-semibold mb-2">Récompenses instantanées</h3>
+                <h3 className="text-xl font-semibold mb-2">Instant rewards</h3>
                 <p className="text-muted-foreground">
-                  Recevez vos Robux directement sur votre compte Roblox.
+                  Receive your Robux directly in your Roblox account.
                 </p>
               </div>
             </div>

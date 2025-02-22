@@ -54,6 +54,11 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Variables pour le bouton 3D - Theme clair */
+    --button-from: 0 100% 63%;      /* #FF3F3F */
+    --button-to: 16 100% 58%;       /* #FF6B2B */
+    --button-glow: 32 100% 57%;     /* #FFA726 */
+    --button-opacity: 0.7;
   }
   .dark {
     --background: 0 0% 0%;
@@ -88,6 +93,11 @@ body {
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Variables pour le bouton 3D - Theme sombre */
+    --button-from: 0 100% 71%;      /* #FF5757 */
+    --button-to: 16 100% 65%;       /* #FF7F47 */
+    --button-glow: 32 100% 65%;     /* #FFB74D */
+    --button-opacity: 0.8;
   }
 }
 
