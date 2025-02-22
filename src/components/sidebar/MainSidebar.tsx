@@ -29,12 +29,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export function MainSidebar() {
   return (
-    <Sidebar>
-      <SidebarHeader className="border-b">
-        <div className="flex h-[60px] items-center px-6">
-          <span className="font-semibold">Roblox API</span>
-        </div>
-      </SidebarHeader>
+    <Sidebar variant="sidebar" collapsible="icon">
+
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="px-6">Navigation</SidebarGroupLabel>
