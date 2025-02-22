@@ -9,6 +9,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { Toaster, toast } from '@/components/ui/sonner';
+import { ThreeDButton } from '@/components/ui/3d-button';
 
 interface UserInfo {
   name: string;
@@ -102,13 +103,16 @@ export default function Home() {
               Participez à des mini-jeux, complétez des tâches et obtenez des Robux en récompense. 
               C'est simple, rapide et amusant !
             </p>
-            <Button
-              onClick={handleLogin}
-              className="bg-[#00A2FF] hover:bg-[#008AE0] text-white font-semibold py-6 px-8 rounded-lg text-lg"
-            >
-              <LogIn className="mr-2 h-6 w-6" />
-              {isLoggedIn ? 'Accéder à mon compte' : 'Se connecter avec Roblox'}
-            </Button>
+            <div className="flex justify-center w-full">
+              <ThreeDButton
+                onClick={handleLogin}
+              >
+                <div className="flex items-center">
+                  <LogIn className="mr-2 h-6 w-6" />
+                  <span>{isLoggedIn ? 'Accéder à mon compte' : 'Se connecter avec Roblox'}</span>
+                </div>
+              </ThreeDButton>
+            </div>
           </div>
         </div>
 

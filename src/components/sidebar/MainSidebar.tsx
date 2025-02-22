@@ -86,15 +86,15 @@ export function MainSidebar() {
   };
 
   return (
-    <Sidebar variant="sidebar" collapsible="icon">
+    <Sidebar variant="sidebar" collapsible="icon" className="font-[var(--font-anta)]">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="px-6">Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel className="px-6 font-[var(--font-anta)]">Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Accueil">
-                  <a href="/" className="flex items-center gap-3 px-6">
+                  <a href="/" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <Home className="h-4 w-4" />
                     <span>Accueil</span>
                   </a>
@@ -102,7 +102,7 @@ export function MainSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Historique">
-                  <a href="/history" className="flex items-center gap-3 px-6">
+                  <a href="/history" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <History className="h-4 w-4" />
                     <span>Historique</span>
                   </a>
@@ -110,7 +110,7 @@ export function MainSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Favoris">
-                  <a href="/starred" className="flex items-center gap-3 px-6">
+                  <a href="/starred" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <Star className="h-4 w-4" />
                     <span>Favoris</span>
                   </a>
@@ -118,7 +118,7 @@ export function MainSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Recherche">
-                  <a href="/search" className="flex items-center gap-3 px-6">
+                  <a href="/search" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <Search className="h-4 w-4" />
                     <span>Recherche</span>
                   </a>
@@ -126,7 +126,7 @@ export function MainSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Paramètres">
-                  <a href="/settings" className="flex items-center gap-3 px-6">
+                  <a href="/settings" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <Settings className="h-4 w-4" />
                     <span>Paramètres</span>
                   </a>
@@ -137,12 +137,12 @@ export function MainSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className="px-6">Documentation</SidebarGroupLabel>
+          <SidebarGroupLabel className="px-6 font-[var(--font-anta)]">Documentation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="API Reference">
-                  <a href="/docs/api" className="flex items-center gap-3 px-6">
+                  <a href="/docs/api" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <Book className="h-4 w-4" />
                     <span>API Reference</span>
                   </a>
@@ -162,7 +162,7 @@ export function MainSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Guides">
-                  <a href="/docs/guides" className="flex items-center gap-3 px-6">
+                  <a href="/docs/guides" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <FileText className="h-4 w-4" />
                     <span>Guides</span>
                   </a>
@@ -198,7 +198,7 @@ export function MainSidebar() {
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col items-start text-left flex-1 min-w-0 group-data-[collapsible=icon]:hidden">
-                <span className="text-sm font-medium truncate w-full">
+                <span className="text-sm font-medium truncate w-full font-[var(--font-anta)]">
                   {user ? user.displayName : 'Connexion'}
                 </span>
                 {user && (
