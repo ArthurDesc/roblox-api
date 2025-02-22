@@ -8,7 +8,6 @@ import { Search } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
-import { Navbar } from '@/components/navbar/Navbar';
 
 interface UserInfo {
   name: string;
@@ -84,7 +83,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background">
-      <Navbar username={loggedInUser?.displayName} />
       
       <div className="p-8">
         <div className="max-w-2xl mx-auto space-y-8">

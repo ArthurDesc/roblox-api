@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { getRobloxApiConfig } from '@/lib/roblox-api';
 
-const ROBLOX_TOKEN_URL = 'https://apis.roblox.com/oauth/v1/token';
-const REDIRECT_URI = 'https://56b0-88-162-202-56.ngrok-free.app/api/auth/roblox/callback';
-const BASE_URL = 'https://56b0-88-162-202-56.ngrok-free.app';
+const { redirectUri, apiEndpoint, urls } = getRobloxApiConfig();
+
+// Utiliser la même base URL que celle utilisée pour l'OAuth
+const baseUrl = redirectUri.split('/api')[0];
 
 async function getAccessToken(code: string) {
   const clientId = process.env.ROBLOX_OAUTHID;
@@ -11,7 +13,7 @@ async function getAccessToken(code: string) {
 
   console.log('[DEBUG] Getting access token with code:', code);
 
-  const response = await fetch(ROBLOX_TOKEN_URL, {
+  const response = await fetch(urls.token, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -20,7 +22,7 @@ async function getAccessToken(code: string) {
     body: new URLSearchParams({
       grant_type: 'authorization_code',
       code,
-      redirect_uri: REDIRECT_URI,
+      redirect_uri: redirectUri,
     }),
   });
 
@@ -36,7 +38,7 @@ async function getAccessToken(code: string) {
 async function getRobloxUserInfo(accessToken: string) {
   console.log('[DEBUG] Getting user info with token');
   
-  const response = await fetch('https://apis.roblox.com/oauth/v1/userinfo', {
+  const response = await fetch(urls.userInfo, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -89,13 +91,13 @@ export async function GET(request: Request) {
       path: '/'
     });
 
-    // Rediriger vers la page d'accueil
-    const finalRedirectUrl = `${BASE_URL}/?logged=true`;
+    // Rediriger vers la page d'accueil avec la même base URL que l'OAuth
+    const finalRedirectUrl = `${baseUrl}/?logged=true`;
     console.log('[DEBUG] Redirecting to:', finalRedirectUrl);
     
     return NextResponse.redirect(finalRedirectUrl);
   } catch (error) {
     console.error('[ERROR] Auth callback error:', error);
-    return NextResponse.redirect(`${BASE_URL}/?error=auth_failed`);
+    return NextResponse.redirect(`${baseUrl}/?error=auth_failed`);
   }
 } 

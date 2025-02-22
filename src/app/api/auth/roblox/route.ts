@@ -1,26 +1,26 @@
 import { NextResponse } from 'next/server';
+import { getRobloxApiConfig } from '@/lib/roblox-api';
 
-const ROBLOX_OAUTH_URL = 'https://apis.roblox.com/oauth/v1/authorize';
-const REDIRECT_URI = 'https://56b0-88-162-202-56.ngrok-free.app/api/auth/roblox/callback';
+const { redirectUri, urls } = getRobloxApiConfig();
 
 export async function GET() {
   try {
     const clientId = process.env.ROBLOX_OAUTHID;
     console.log('[DEBUG] Starting OAuth process with client ID:', clientId);
-    console.log('[DEBUG] Using redirect URI:', REDIRECT_URI);
+    console.log('[DEBUG] Using redirect URI:', redirectUri);
 
     const state = Math.random().toString(36).substring(7);
     console.log('[DEBUG] Generated state:', state);
 
     const params = new URLSearchParams({
       client_id: clientId!,
-      redirect_uri: REDIRECT_URI,
+      redirect_uri: redirectUri,
       scope: 'openid profile',
       response_type: 'code',
       state: state,
     });
 
-    const authUrl = `${ROBLOX_OAUTH_URL}?${params.toString()}`;
+    const authUrl = `${urls.authorize}?${params.toString()}`;
     console.log('[DEBUG] Generated auth URL:', authUrl);
     console.log('[DEBUG] Full params:', params.toString());
 
