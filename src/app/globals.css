@@ -94,9 +94,9 @@ body {
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
     /* Variables pour le bouton 3D - Theme sombre */
-    --button-from: 0 100% 71%;      /* #FF5757 */
-    --button-to: 16 100% 65%;       /* #FF7F47 */
-    --button-glow: 32 100% 65%;     /* #FFB74D */
+    --button-from: 210 100% 50%;      /* #007BFF */
+    --button-to: 200 100% 50%;        /* #00A2FF */
+    --button-glow: 190 100% 50%;      /* #00C9FF */
     --button-opacity: 0.8;
   }
 }

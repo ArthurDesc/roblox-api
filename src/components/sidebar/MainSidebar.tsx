@@ -93,42 +93,42 @@ export function MainSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Accueil">
+                <SidebarMenuButton asChild tooltip="Home">
                   <a href="/" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <Home className="h-4 w-4" />
-                    <span>Accueil</span>
+                    <span>Home</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Historique">
+                <SidebarMenuButton asChild tooltip="History">
                   <a href="/history" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <History className="h-4 w-4" />
-                    <span>Historique</span>
+                    <span>History</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Favoris">
+                <SidebarMenuButton asChild tooltip="Favorites">
                   <a href="/starred" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <Star className="h-4 w-4" />
-                    <span>Favoris</span>
+                    <span>Favorites</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Recherche">
+                <SidebarMenuButton asChild tooltip="Search">
                   <a href="/search" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <Search className="h-4 w-4" />
-                    <span>Recherche</span>
+                    <span>Search</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Paramètres">
+                <SidebarMenuButton asChild tooltip="Settings">
                   <a href="/settings" className="flex items-center gap-3 px-6 font-[var(--font-anta)]">
                     <Settings className="h-4 w-4" />
-                    <span>Paramètres</span>
+                    <span>Settings</span>
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -170,12 +170,12 @@ export function MainSidebar() {
                 <SidebarMenuSub>
                   <SidebarMenuSubItem>
                     <SidebarMenuSubButton href="/docs/guides/basics">
-                      Les bases
+                      Basics
                     </SidebarMenuSubButton>
                   </SidebarMenuSubItem>
                   <SidebarMenuSubItem>
                     <SidebarMenuSubButton href="/docs/guides/advanced">
-                      Avancé
+                      Advanced
                     </SidebarMenuSubButton>
                   </SidebarMenuSubItem>
                 </SidebarMenuSub>
@@ -194,16 +194,16 @@ export function MainSidebar() {
               <Avatar className="h-8 w-8 flex-shrink-0">
                 <AvatarImage src={user?.avatarUrl} alt={user?.displayName} />
                 <AvatarFallback>
-                  {user ? user.displayName[0] : 'C'}
+                  {user ? user.displayName[0] : 'L'}
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col items-start text-left flex-1 min-w-0 group-data-[collapsible=icon]:hidden">
                 <span className="text-sm font-medium truncate w-full font-[var(--font-anta)]">
-                  {user ? user.displayName : 'Connexion'}
+                  {user ? user.displayName : 'Login'}
                 </span>
                 {user && (
                   <span className="text-xs text-muted-foreground truncate w-full">
-                    Mon compte
+                    My Account
                   </span>
                 )}
               </div>
@@ -212,7 +212,7 @@ export function MainSidebar() {
           </DropdownMenuTrigger>
           {user && (
             <DropdownMenuContent className="w-56" align="start" side="right">
-              <DropdownMenuLabel>Mon Compte</DropdownMenuLabel>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
                 {theme === "dark" ? (
@@ -220,15 +220,15 @@ export function MainSidebar() {
                 ) : (
                   <Moon className="mr-2 h-4 w-4" />
                 )}
-                <span>Basculer le thème</span>
+                <span>Toggle theme</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <CreditCard className="mr-2 h-4 w-4" />
-                <span>Facturation</span>
+                <span>Billing</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Settings className="mr-2 h-4 w-4" />
-                <span>Paramètres</span>
+                <span>Settings</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Bell className="mr-2 h-4 w-4" />
@@ -240,7 +240,7 @@ export function MainSidebar() {
                 onClick={handleLogout}
               >
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>Déconnexion</span>
+                <span>Logout</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           )}
