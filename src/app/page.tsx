@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/Button";
-import { Search } from "lucide-react";
+import { Search, Home as HomeIcon, Star, Gift, Clock, CheckCircle, LogIn } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { Toaster, toast } from '@/components/ui/sonner';
 
 interface UserInfo {
   name: string;
@@ -43,16 +44,18 @@ export default function Home() {
             name: data.name,
             displayName: data.displayName
           });
+          // Afficher la notification si l'utilisateur vient de se connecter
+          const urlParams = new URLSearchParams(window.location.search);
+          if (urlParams.get('logged') === 'true') {
+            toast.success('Connexion réussie !', {
+              description: `Bienvenue ${data.displayName || data.name}`,
+            });
+            // Nettoyer l'URL
+            window.history.replaceState({}, document.title, '/');
+          }
         }
       })
       .catch(err => console.error('Erreur lors de la vérification de la connexion:', err));
-
-    // Vérifier si l'utilisateur vient de se connecter
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('logged') === 'true') {
-      // Nettoyer l'URL
-      window.history.replaceState({}, document.title, '/');
-    }
   }, []);
 
   const searchUser = async (e: React.FormEvent) => {
@@ -82,125 +85,109 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-background">
-      
-      <div className="p-8">
-        <div className="max-w-2xl mx-auto space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Recherche d&apos;utilisateur Roblox</CardTitle>
-              <CardDescription>
-                Entrez un nom d&apos;utilisateur Roblox pour voir ses informations
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {!isLoggedIn ? (
-                <Button 
-                  onClick={handleLogin}
-                  className="w-full bg-[#00A2FF] hover:bg-[#008AE0]"
-                >
-                  Se connecter avec Roblox
-                </Button>
-              ) : (
-                <Alert className="bg-green-100 text-green-800 mb-4">
-                  <AlertDescription>
-                    Vous êtes connecté avec succès !
-                  </AlertDescription>
-                </Alert>
-              )}
-
-              <form onSubmit={searchUser} className="flex gap-4">
-                <Input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Entrez un nom d'utilisateur"
-                  className="flex-1"
-                  required
-                />
-                <Button type="submit" disabled={loading}>
-                  {loading ? (
-                    <span className="flex items-center gap-2">
-                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                      Recherche...
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      <Search className="h-4 w-4" />
-                      Rechercher
-                    </span>
-                  )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-
-          {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-
-          {loading && (
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex gap-6">
-                  <Skeleton className="h-32 w-32 rounded-full" />
-                  <div className="flex-1 space-y-4">
-                    <Skeleton className="h-8 w-[250px]" />
-                    <Skeleton className="h-4 w-[200px]" />
-                    <Skeleton className="h-4 w-[300px]" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {userInfo && (
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex flex-col md:flex-row gap-6">
-                  {userInfo.avatar && (
-                    <div className="relative">
-                      <img
-                        src={userInfo.avatar}
-                        alt={`Avatar de ${userInfo.name}`}
-                        className="w-32 h-32 rounded-full object-cover border-4 border-primary/10"
-                      />
-                      {userInfo.isBanned && (
-                        <Badge variant="destructive" className="absolute -top-2 -right-2">
-                          Banni
-                        </Badge>
-                      )}
-                    </div>
-                  )}
-                  <div className="flex-1 space-y-4">
-                    <div>
-                      <h2 className="text-2xl font-bold">{userInfo.displayName}</h2>
-                      <p className="text-muted-foreground">@{userInfo.name}</p>
-                    </div>
-                    <div className="space-y-2">
-                      <p className="text-sm text-muted-foreground">
-                        ID: {userInfo.id}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        Créé le: {new Date(userInfo.created).toLocaleDateString()}
-                      </p>
-                    </div>
-                    {userInfo.description && (
-                      <div className="bg-muted p-4 rounded-lg">
-                        <p className="text-sm whitespace-pre-wrap">
-                          {userInfo.description}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          )}
+    <>
+      <Toaster position="top-center" />
+      <main className="min-h-screen bg-background text-foreground">
+        {/* Hero Section */}
+        <div className="relative py-20 px-4 text-center">
+          <div className="absolute inset-0">
+            <div className="absolute w-96 h-96 bg-[#00A2FF] rounded-full blur-[150px] -top-20 -left-20 opacity-20 animate-pulse" />
+            <div className="absolute w-96 h-96 bg-[#FF3F3F] rounded-full blur-[150px] -bottom-20 -right-20 opacity-20 animate-pulse" />
+          </div>
+          <div className="relative z-10 max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              Gagnez des <span className="text-[#00A2FF]">Robux</span> facilement !
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground mb-8">
+              Participez à des mini-jeux, complétez des tâches et obtenez des Robux en récompense. 
+              C'est simple, rapide et amusant !
+            </p>
+            <Button
+              onClick={handleLogin}
+              className="bg-[#00A2FF] hover:bg-[#008AE0] text-white font-semibold py-6 px-8 rounded-lg text-lg"
+            >
+              <LogIn className="mr-2 h-6 w-6" />
+              {isLoggedIn ? 'Accéder à mon compte' : 'Se connecter avec Roblox'}
+            </Button>
+          </div>
         </div>
-      </div>
-    </main>
+
+        {/* Features Section */}
+        <div className="py-16 px-4 bg-secondary">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              Comment ça marche ?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Card>
+                <CardHeader>
+                  <HomeIcon className="h-10 w-10 mb-4 text-[#00A2FF]" />
+                  <CardTitle>Créez un compte</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-muted-foreground">
+                    Inscrivez-vous en quelques secondes avec votre compte Roblox.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <Star className="h-10 w-10 mb-4 text-[#00A2FF]" />
+                  <CardTitle>Gagnez des points</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-muted-foreground">
+                    Complétez des mini-jeux et des tâches pour accumuler des points.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <Gift className="h-10 w-10 mb-4 text-[#00A2FF]" />
+                  <CardTitle>Échangez vos points</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-muted-foreground">
+                    Convertissez vos points en Robux et recevez-les instantanément.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+
+        {/* Why Choose Us Section */}
+        <div className="py-16 px-4 bg-background">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              Pourquoi choisir notre site ?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <Clock className="h-10 w-10 mb-4 mx-auto text-[#00A2FF]" />
+                <h3 className="text-xl font-semibold mb-2">Rapide et facile</h3>
+                <p className="text-muted-foreground">
+                  Gagnez des Robux en quelques minutes grâce à des tâches simples.
+                </p>
+              </div>
+              <div className="text-center">
+                <CheckCircle className="h-10 w-10 mb-4 mx-auto text-[#00A2FF]" />
+                <h3 className="text-xl font-semibold mb-2">Sécurisé</h3>
+                <p className="text-muted-foreground">
+                  Votre compte Roblox est en sécurité avec notre système de connexion OAuth.
+                </p>
+              </div>
+              <div className="text-center">
+                <Gift className="h-10 w-10 mb-4 mx-auto text-[#00A2FF]" />
+                <h3 className="text-xl font-semibold mb-2">Récompenses instantanées</h3>
+                <p className="text-muted-foreground">
+                  Recevez vos Robux directement sur votre compte Roblox.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
   );
 }

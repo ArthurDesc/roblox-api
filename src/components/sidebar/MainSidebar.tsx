@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Home, History, Star, Settings, Search, Book, FileText, CreditCard, Bell, LogOut } from "lucide-react"
+import { Home, History, Star, Settings, Search, Book, FileText, CreditCard, Bell, LogOut, Moon, Sun } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -28,6 +28,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useTheme } from "next-themes";
 
 interface RobloxUser {
   name: string;
@@ -39,6 +40,7 @@ export function MainSidebar() {
   const router = useRouter();
   const [user, setUser] = useState<RobloxUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const { setTheme, theme } = useTheme();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -66,6 +68,21 @@ export function MainSidebar() {
 
   const handleLogin = () => {
     router.push('/api/auth/roblox');
+  };
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/api/auth/logout', {
+        method: 'POST'
+      });
+
+      if (response.ok) {
+        setUser(null);
+        router.refresh(); // Rafraîchir la page pour mettre à jour l'état
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
   };
 
   return (
@@ -171,7 +188,7 @@ export function MainSidebar() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button 
-              className="flex h-[60px] w-full items-center justify-center gap-3 px-6 hover:bg-accent group-data-[collapsible=icon]:px-2"
+              className="flex h-[60px] w-full items-center justify-center gap-3 px-6 hover:bg-accent group-data-[collapsible=icon]:px-2 focus:outline-none"
               onClick={!user ? handleLogin : undefined}
             >
               <Avatar className="h-8 w-8">
@@ -184,11 +201,6 @@ export function MainSidebar() {
                 <span className="text-sm font-medium">
                   {user ? user.displayName : 'Connexion'}
                 </span>
-                {user && (
-                  <span className="text-xs text-muted-foreground">
-                    @{user.name}
-                  </span>
-                )}
               </div>
             </button>
           </DropdownMenuTrigger>
@@ -196,6 +208,14 @@ export function MainSidebar() {
             <DropdownMenuContent className="w-56" align="start" side="right">
               <DropdownMenuLabel>Mon Compte</DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+                {theme === "dark" ? (
+                  <Sun className="mr-2 h-4 w-4" />
+                ) : (
+                  <Moon className="mr-2 h-4 w-4" />
+                )}
+                <span>Basculer le thème</span>
+              </DropdownMenuItem>
               <DropdownMenuItem>
                 <CreditCard className="mr-2 h-4 w-4" />
                 <span>Facturation</span>
@@ -209,7 +229,10 @@ export function MainSidebar() {
                 <span>Notifications</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-red-600">
+              <DropdownMenuItem 
+                className="text-red-600"
+                onClick={handleLogout}
+              >
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Déconnexion</span>
               </DropdownMenuItem>

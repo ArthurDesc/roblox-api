@@ -4,6 +4,7 @@ import { MainSidebar } from "@/components/sidebar/MainSidebar";
 import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,27 +22,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="h-full">
+    <html lang="fr" className="h-full" suppressHydrationWarning>
       <body className={`${inter.variable} antialiased min-h-screen`}>
-        <SidebarProvider
-          style={{
-            "--sidebar-width": "16rem",
-          } as React.CSSProperties}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          <MainSidebar />
-          <SidebarInset>
-            <header className="sticky top-0 flex h-14 shrink-0 items-center gap-2 border-b bg-background px-4">
-              <SidebarTrigger />
-              <Separator orientation="vertical" className="h-4" />
-              <div className="flex-1">iZi Robux</div>
-            </header>
-            <main className="flex-1">
-              <div className="flex-1 space-y-4 p-4">
-                {children}
-              </div>
-            </main>
-          </SidebarInset>
-        </SidebarProvider>
+          <SidebarProvider
+            style={{
+              "--sidebar-width": "16rem",
+            } as React.CSSProperties}
+          >
+            <MainSidebar />
+            <SidebarInset>
+              <header className="sticky top-0 flex h-14 shrink-0 items-center gap-2 px-4">
+                <SidebarTrigger />
+              </header>
+              <main className="flex-1">
+                <div className="flex-1 space-y-4 p-4">
+                  {children}
+                </div>
+              </main>
+            </SidebarInset>
+          </SidebarProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
