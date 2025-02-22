@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Home, History, Star, Settings, Search, Book, FileText, CreditCard, Bell, LogOut, Moon, Sun, ChevronDown } from "lucide-react"
+import { Home, History, Star, Settings, Search, Book, FileText, CreditCard, Bell, LogOut, Moon, Sun, ChevronDown, User } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -236,10 +236,18 @@ export function MainSidebar() {
               onClick={!user ? handleLogin : undefined}
             >
               <Avatar className="h-8 w-8 flex-shrink-0 border-2 border-primary/10">
-                <AvatarImage src={user?.avatarUrl} alt={user?.displayName} />
-                <AvatarFallback className="bg-primary/10">
-                  {user ? user.displayName[0] : 'L'}
-                </AvatarFallback>
+                {user ? (
+                  <AvatarImage src={user.avatarUrl} alt={user.displayName} />
+                ) : (
+                  <div className="flex items-center justify-center h-full w-full bg-primary/10">
+                    <User className="h-4 w-4 text-primary" />
+                  </div>
+                )}
+                {user && (
+                  <AvatarFallback className="bg-primary/10">
+                    {user.displayName[0]}
+                  </AvatarFallback>
+                )}
               </Avatar>
               <div className="flex flex-col items-start text-left flex-1 min-w-0 group-data-[collapsible=icon]:hidden">
                 <span className="text-sm font-medium truncate w-full font-[var(--font-anta)]">
@@ -251,7 +259,9 @@ export function MainSidebar() {
                   </span>
                 )}
               </div>
-              <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0 group-data-[collapsible=icon]:hidden" />
+              {user && (
+                <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0 group-data-[collapsible=icon]:hidden" />
+              )}
             </button>
           </DropdownMenuTrigger>
           {user && (

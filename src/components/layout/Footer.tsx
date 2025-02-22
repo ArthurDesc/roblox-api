@@ -7,8 +7,8 @@ import { Separator } from "@/components/ui/separator"
 
 export function Footer() {
   return (
-    <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex flex-col gap-6 py-8">
+    <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 mt-auto">
+      <div className="container flex flex-col gap-6 py-8 peer-data-[collapsible=icon]:ml-[3rem] peer-data-[collapsible=offcanvas]:ml-0 transition-[margin] duration-200 ease-linear">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Section Navigation */}
           <div className="space-y-4">

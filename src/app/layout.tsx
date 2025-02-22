@@ -51,9 +51,9 @@ export default function RootLayout({
                 </main>
               </SidebarInset>
             </SidebarProvider>
-            <Footer />
           </ThemeProvider>
         </div>
+        <Footer className="peer-data-[collapsible=icon]:ml-[3rem] peer-data-[collapsible=offcanvas]:ml-0 transition-[margin] duration-200 ease-linear" />
       </body>
     </html>
   );
