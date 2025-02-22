@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Sidebar } from "@/components/sidebar/Sidebar";
+import { MainSidebar } from "@/components/sidebar/MainSidebar";
+import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,12 +22,21 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${inter.variable} antialiased`}>
-        <div className="flex h-screen">
-          <Sidebar />
-          <main className="flex-1 overflow-auto">
-            {children}
-          </main>
-        </div>
+        <SidebarProvider defaultOpen>
+          <div className="flex min-h-screen">
+            <MainSidebar />
+            <SidebarInset>
+              <div className="flex h-16 items-center border-b px-6">
+                <SidebarTrigger>
+                  <span className="sr-only">Toggle Sidebar</span>
+                </SidebarTrigger>
+              </div>
+              <div className="p-6">
+                {children}
+              </div>
+            </SidebarInset>
+          </div>
+        </SidebarProvider>
       </body>
     </html>
   );
