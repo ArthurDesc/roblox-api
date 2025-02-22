@@ -5,6 +5,7 @@ import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/s
 import { Separator } from "@/components/ui/separator";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import { Footer } from "@/components/layout/Footer"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -47,6 +48,7 @@ export default function RootLayout({
               </main>
             </SidebarInset>
           </SidebarProvider>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

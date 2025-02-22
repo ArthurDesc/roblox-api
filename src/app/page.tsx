@@ -113,7 +113,7 @@ export default function Home() {
         </div>
 
         {/* Features Section */}
-        <div className="py-16 px-4 bg-secondary">
+        <div className="py-16 px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               Comment ça marche ?
