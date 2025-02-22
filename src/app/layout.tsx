@@ -25,31 +25,33 @@ export default function RootLayout({
   return (
     <html lang="fr" className="h-full" suppressHydrationWarning>
       <body className={`${inter.variable} antialiased min-h-screen`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SidebarProvider
-            style={{
-              "--sidebar-width": "16rem",
-            } as React.CSSProperties}
+        <div className="w-full max-w-[100vw] overflow-hidden">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
           >
-            <MainSidebar />
-            <SidebarInset>
-              <header className="sticky top-0 flex h-14 shrink-0 items-center gap-2 px-4">
-                <SidebarTrigger />
-              </header>
-              <main className="flex-1">
-                <div className="flex-1 space-y-4 p-4">
-                  {children}
-                </div>
-              </main>
-            </SidebarInset>
-          </SidebarProvider>
-          <Footer />
-        </ThemeProvider>
+            <SidebarProvider
+              style={{
+                "--sidebar-width": "16rem",
+              } as React.CSSProperties}
+            >
+              <MainSidebar />
+              <SidebarInset>
+                <header className="sticky top-0 flex h-14 shrink-0 items-center gap-2 px-4">
+                  <SidebarTrigger />
+                </header>
+                <main className="flex-1">
+                  <div className="flex-1 space-y-4 p-4">
+                    {children}
+                  </div>
+                </main>
+              </SidebarInset>
+            </SidebarProvider>
+            <Footer />
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   );

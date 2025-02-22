@@ -4,7 +4,7 @@ import { Button } from '../ui/Button';
 
 export function Hero() {
   return (
-    <div className="relative min-h-[600px] flex items-center justify-center bg-gradient-to-b from-[#1E2024] to-[#17181B] overflow-hidden">
+    <div className="relative min-h-[600px] flex items-center justify-center bg-gradient-to-b from-[#1E2024] to-[#17181B] overflow-hidden w-full max-w-[100vw]">
       {/* Animated background elements */}
       <div className="absolute inset-0">
         <div className="absolute w-96 h-96 bg-[#00A2FF] rounded-full blur-[150px] -top-20 -left-20 opacity-20 animate-pulse" />

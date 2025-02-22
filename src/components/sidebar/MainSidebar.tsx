@@ -188,7 +188,7 @@ export function MainSidebar() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button 
-              className="flex h-[60px] w-full items-center gap-3 px-4 hover:bg-accent/50 rounded-md transition-colors group-data-[collapsible=icon]:px-2 focus:outline-none"
+              className="flex h-[60px] w-full items-center gap-3 px-4 hover:bg-accent/50 rounded-md transition-colors group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-2 focus:outline-none"
               onClick={!user ? handleLogin : undefined}
             >
               <Avatar className="h-8 w-8 flex-shrink-0">
@@ -207,7 +207,7 @@ export function MainSidebar() {
                   </span>
                 )}
               </div>
-              <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+              <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0 group-data-[collapsible=icon]:hidden" />
             </button>
           </DropdownMenuTrigger>
           {user && (
