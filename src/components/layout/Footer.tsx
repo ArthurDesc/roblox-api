@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Home, Github, Twitter, Mail } from "lucide-react"
-import { Button } from "@/components/ui/Button"
+import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 
 export function Footer() {
@@ -58,7 +58,7 @@ export function Footer() {
         <Separator />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} iZi Robux. Tous droits réservés.</p>
+          <p>© {new Date().getFullYear()} Robux. Tous droits réservés.</p>
           <div className="flex space-x-4">
             <Link href="/terms" className="hover:text-foreground transition-colors">
               Conditions d'utilisation

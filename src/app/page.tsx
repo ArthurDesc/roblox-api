@@ -3,13 +3,14 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { Search, Home as HomeIcon, Star, Gift, Clock, CheckCircle, LogIn } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
-import { Toaster, toast } from '@/components/ui/sonner';
+import { Toaster, toast } from 'sonner';
 import { ThreeDButton } from '@/components/ui/3d-button';
+import { AuthDialog } from "@/components/auth/AuthDialog"
 
 interface UserInfo {
   name: string;
@@ -37,9 +38,9 @@ export default function Home() {
   useEffect(() => {
     // Check login status on load
     fetch('/api/auth/me')
-      .then(res => res.json())
-      .then(data => {
-        if (!data.error) {
+      .then(async res => {
+        if (res.ok) {
+          const data = await res.json();
           setIsLoggedIn(true);
           setLoggedInUser({
             name: data.name,
@@ -54,9 +55,17 @@ export default function Home() {
             // Clean up URL
             window.history.replaceState({}, document.title, '/');
           }
+        } else {
+          // L'utilisateur n'est pas connecté, c'est normal
+          setIsLoggedIn(false);
+          setLoggedInUser(null);
         }
       })
-      .catch(err => console.error('Error checking login status:', err));
+      .catch(err => {
+        console.error('Error checking login status:', err);
+        setIsLoggedIn(false);
+        setLoggedInUser(null);
+      });
   }, []);
 
   const searchUser = async (e: React.FormEvent) => {
@@ -108,12 +117,12 @@ export default function Home() {
             Every challenge you complete brings you closer to your Roblox goals!
           </p>
           <div className="flex justify-center w-full">
-            <ThreeDButton onClick={handleLogin}>
-              <div className="flex items-center">
-                <LogIn className="mr-2 h-6 w-6" />
-                <span>{isLoggedIn ? 'Access my account' : 'Start the adventure!'}</span>
-              </div>
-            </ThreeDButton>
+              <AuthDialog>
+                <div className="flex items-center">
+                  <LogIn className="mr-2 h-6 w-6" />
+                  <span>Start the adventure!</span>
+                </div>
+              </AuthDialog>
           </div>
         </div>
 

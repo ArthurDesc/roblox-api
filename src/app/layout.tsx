@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "iZi Robux",
+  title: "Robux",
   description: "Explorez et intégrez l'API Roblox facilement",
 };
 

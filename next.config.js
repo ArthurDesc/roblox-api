@@ -22,6 +22,19 @@ const nextConfig = {
     
     return [];
   },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com https://*.awswaf.com https://*.roblox.com https://*.robloxlabs.com https://*.fullstory.com https://js.stripe.com https://www.youtube.com https://www.instagram.com/embed.js; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: http:; font-src 'self' data:; connect-src 'self' https://apis.roblox.com https://*.roblox.com;"
+          }
+        ]
+      }
+    ];
+  }
 }
 
 module.exports = nextConfig
