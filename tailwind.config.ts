@@ -84,11 +84,20 @@ const config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			spin: {
+  				from: {
+  					transform: 'rotate(0deg)'
+  				},
+  				to: {
+  					transform: 'rotate(360deg)'
+  				}
   			}
   		},
   		animation: {
-  			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-down': 'accordion-down 0.5s ease-out',
+  			'accordion-up': 'accordion-up 0.5s ease-out',
+  			'spin-slow': 'spin 6s linear infinite'
   		},
   		fontFamily: {
   			sans: ['Anta', 'sans-serif'],

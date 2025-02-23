@@ -95,22 +95,25 @@ export default function Home() {
             <div className="absolute w-96 h-96 bg-[#00A2FF] rounded-full blur-[150px] -top-20 -left-20 opacity-20 animate-pulse" />
             <div className="absolute w-96 h-96 bg-[#FF3F3F] rounded-full blur-[150px] -bottom-20 -right-20 opacity-20 animate-pulse" />
           </div>
-          <div className="relative z-10 max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Turn your <span className="text-[#FF3F3F]">Dreams</span> into Robux!
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8">
-              Join our community of passionate players and discover a world of rewards. 
-              Every challenge you complete brings you closer to your Roblox goals!
-            </p>
-            <div className="flex justify-center w-full">
-              <ThreeDButton onClick={handleLogin}>
-                <div className="flex items-center">
-                  <LogIn className="mr-2 h-6 w-6" />
-                  <span>{isLoggedIn ? 'Access my account' : 'Start the adventure!'}</span>
-                </div>
-              </ThreeDButton>
-            </div>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            Turn your <span className="text-[#FF3F3F]">Dreams</span> into Robux !
+          </h1>
+          <img 
+            src="/assets/images/RobuxIcon.webp" 
+            alt="Robux Icon"
+            className="w-16 mx-auto mb-8 animate-spin-slow"
+          />
+          <p className="text-lg md:text-xl text-muted-foreground mb-8">
+            Join our community of passionate players and discover a world of rewards. 
+            Every challenge you complete brings you closer to your Roblox goals!
+          </p>
+          <div className="flex justify-center w-full">
+            <ThreeDButton onClick={handleLogin}>
+              <div className="flex items-center">
+                <LogIn className="mr-2 h-6 w-6" />
+                <span>{isLoggedIn ? 'Access my account' : 'Start the adventure!'}</span>
+              </div>
+            </ThreeDButton>
           </div>
         </div>
 
